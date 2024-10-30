@@ -17,6 +17,10 @@
         <form action="/listings/<%= listing._id %>/edit">
             <button>Edit</button>
         </form>
+
+        <form method="POST" action="/listings/<%= listing.id %>?_method=DELETE">
+            <button>Delete</button>
+        </form>
     </ul>
 </body>
 </html>

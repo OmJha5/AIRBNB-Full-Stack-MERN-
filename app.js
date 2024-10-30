@@ -63,6 +63,13 @@ app.post("/listings/:id" , async (req , res) => {
     res.redirect(`/listings/${id}`);
 })
 
+app.delete("/listings/:id" , async (req , res) => {
+    const {id} = req.params;
+    await Listing.findByIdAndDelete(id);
+
+    res.redirect("/listings");
+})
+
 app.listen(8080 , () => {
     console.log("App is listening on port 8080");
 })
