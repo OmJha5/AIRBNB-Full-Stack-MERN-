@@ -31,12 +31,22 @@ app.get("/listings" , async (req , res) => {
     res.render("Listings/index.ejs" , { allListings });
 })
 
+app.get("/listings/new" , (req , res) => {
+    res.render("Listings/new.ejs");
+})
+
 // It will show a specific listing details
 app.get("/listings/:id" , async (req , res) => {
     const {id} = req.params;
     const listing = await Listing.findById(id);
     console.log(listing);
     res.render("Listings/show.ejs" , { listing });
+})
+
+app.post("/listings" , (req , res) => {
+    const newListing = new Listing(req.body.Listing)
+    newListing.save()
+    res.redirect("/listings");
 })
 
 
