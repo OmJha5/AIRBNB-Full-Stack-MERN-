@@ -56,7 +56,7 @@ app.get("/listings/:id/edit" , async (req , res) => {
     res.render("Listings/edit.ejs" , {listing});
 })
 
-app.post("/listings/:id" , async (req , res) => {
+app.patch("/listings/:id" , async (req , res) => {
     const {id} = req.params;
     await Listing.findByIdAndUpdate(id , {...req.body.Listing});
 
