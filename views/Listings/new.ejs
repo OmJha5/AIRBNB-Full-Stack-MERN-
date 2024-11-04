@@ -1,23 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Listing</title>
-</head>
+<% layout("/layouts/boilerplate.ejs") %>
 <body>
-    <h3>Create New Listing</h3>
+    <h1>Create New Listing</h1>
 
     <form action="/listings" method="POST">
-        <input name="Listing[title]" type="text" placeholder="Enter Title"> <br>
-        <textarea name="Listing[description]" placeholder="Enter Description"></textarea>
-        <input name="Listing[price]" type="text" placeholder="Enter Price"> <br>
-        <input name="Listing[country]" type="text" placeholder="Enter Country"> <br>
-        <input name="Listing[location]" type="text" placeholder="Enter Location"> <br>
+        <div class="title">
+            <label for="title">Title</label> <br>
+            <input name="Listing[title]" id="title" type="text" placeholder="Enter Title"> 
+        </div>
 
-        <button>Create</button>
+        <div class="description">
+            <label for="desc">Description</label> <br>
+            <textarea name="Listing[description]" placeholder="Enter Description" id="desc"></textarea>
+        </div>
+
+        <div class="image">
+            <label for="image">Image</label> <br>
+            <input type="url" name="Listing[image]" placeholder="Enter URL of Image" id="image">
+        </div>
+
+        <div class="priceAndCountry">
+            <span class="price">
+                <label for="price">Price</label>
+                <input name="Listing[price]" type="text" placeholder="Enter Price" id="price"> 
+            </span>
+
+            <span class="country">
+                <label for="country">Country</label>
+                <input name="Listing[country]" type="text" placeholder="Enter Country" id="country"> <br>
+            </span>
+        </div>
+
+        <div class="location">
+            <label for="location">Location</label> <br>
+            <input name="Listing[location]" type="text" placeholder="Enter Location" id="location">
+        </div>
+
+        <button id="btn">Create</button>
     </form>
 
-
 </body>
-</html>

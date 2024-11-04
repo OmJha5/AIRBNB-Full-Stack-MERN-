@@ -28,6 +28,7 @@
     padding : 3px 0px;
     border-bottom: 1px solid #e0d6d6;
     font-family: 'Poppins', sans-serif;
+    z-index: 1;
 }
 
 #navbar li{

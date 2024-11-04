@@ -37,7 +37,7 @@ app.get("/listings" , async (req , res) => {
 })
 
 app.get("/listings/new" , (req , res) => {
-    res.render("Listings/new.ejs");
+    res.render("Listings/new.ejs" , {page : "new"});
 })
 
 // It will show a specific listing details
