@@ -1,16 +1,43 @@
 <% layout("/layouts/boilerplate") %>
 
 <body>
-    <h3>Edit Your Listing</h3>
 
     <form action="/listings/<%= listing._id %>?_method=PATCH" method="POST">
-        <input name="Listing[title]" type="text" value="<%= listing.title %>"> <br>
-        <textarea name="Listing[description]"> <%= listing.description %> </textarea>
-        <input name="Listing[price]" type="text" value="<%= listing.price %>"> <br>
-        <input name="Listing[country]" type="text" value="<%= listing.country %>"> <br>
-        <input name="Listing[location]" type="text" value="<%= listing.location %>"> <br>
+        <h1>Edit Your Listing</h1>
 
-        <button>Edit</button>
+        <div class="title">
+            <label for="title">Title</label> <br>
+            <input name="Listing[title]" id="title" type="text" placeholder="Enter Title" value="<%= listing.title %>"> 
+        </div>
+
+        <div class="description">
+            <label for="desc">Description</label> <br>
+            <textarea name="Listing[description]" placeholder="Enter Description" id="desc" rows="3"> <%= listing.description %></textarea>
+        </div>
+
+        <div class="image">
+            <label for="image">Image</label> <br>
+            <input type="url" name="Listing[image]" placeholder="Enter URL of Image" id="image" value="<%= listing.image %>">
+        </div>
+
+        <div class="priceAndCountry">
+            <span class="price">
+                <label for="price">Price</label>
+                <input name="Listing[price]" type="text" placeholder="Enter Price" id="price"  value="<%= listing.price %>"> 
+            </span>
+
+            <span class="country">
+                <label for="country">Country</label>
+                <input name="Listing[country]" type="text" placeholder="Enter Country" id="country" value="<%= listing.country %>"> <br>
+            </span>
+        </div>
+
+        <div class="location">
+            <label for="location">Location</label> <br>
+            <input name="Listing[location]" type="text" placeholder="Enter Location" id="location" value="<%= listing.location %>">
+        </div>
+
+        <button id="btn">Edit</button>
     </form>
 
 </body>

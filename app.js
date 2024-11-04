@@ -56,7 +56,7 @@ app.post("/listings" , (req , res) => {
 app.get("/listings/:id/edit" , async (req , res) => {
     const {id} = req.params;
     const listing = await Listing.findById(id);
-    res.render("Listings/edit.ejs" , {listing});
+    res.render("Listings/edit.ejs" , {listing , page : "edit"});
 })
 
 app.patch("/listings/:id" , async (req , res) => {
