@@ -1,0 +1,48 @@
+form{
+    width: 80%;
+    margin: 2rem auto;
+}
+
+h1{
+    margin: 0rem 0rem 1rem 0rem !important;
+    font-weight: 600;
+}
+
+input , textarea{
+    margin: 1rem 0rem;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 0.45rem;
+    border: none;
+    border: 1px solid black;
+    font-family: "Plus Jakarta Sans", sans-serif ;
+    box-sizing: border-box;
+}
+
+label{
+    font-family: "Plus Jakarta Sans", sans-serif ;
+}
+
+.priceAndCountry{
+    display: flex;
+    justify-content: space-between;
+}
+
+.price{
+    width: 35%;
+}
+
+.country{
+    width: 61%;
+}
+
+#btn{
+    padding: 5px 10px;
+    margin: 0.9rem 0rem;
+    border-radius: 0.3rem;
+    border: 1px solid grey;
+    background: #ff6969;
+    color: white;
+    cursor: pointer;
+    font-family: "Plus Jakarta Sans", sans-serif ;
+}

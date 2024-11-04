@@ -1,8 +1,11 @@
 <% layout("/layouts/boilerplate.ejs") %>
+
 <body>
-    <h1>Create New Listing</h1>
+    
 
     <form action="/listings" method="POST">
+        <h1>Create New Listing</h1>
+
         <div class="title">
             <label for="title">Title</label> <br>
             <input name="Listing[title]" id="title" type="text" placeholder="Enter Title"> 
@@ -10,7 +13,7 @@
 
         <div class="description">
             <label for="desc">Description</label> <br>
-            <textarea name="Listing[description]" placeholder="Enter Description" id="desc"></textarea>
+            <textarea name="Listing[description]" placeholder="Enter Description" id="desc" rows="3"></textarea>
         </div>
 
         <div class="image">
