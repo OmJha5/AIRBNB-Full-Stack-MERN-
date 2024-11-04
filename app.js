@@ -44,7 +44,7 @@ app.get("/listings/new" , (req , res) => {
 app.get("/listings/:id" , async (req , res) => {
     const {id} = req.params;
     const listing = await Listing.findById(id);
-    res.render("Listings/show.ejs" , { listing });
+    res.render("Listings/show.ejs" , { listing , page : "show" });
 })
 
 app.post("/listings" , (req , res) => {

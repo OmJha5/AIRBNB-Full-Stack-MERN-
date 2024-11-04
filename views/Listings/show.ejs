@@ -1,19 +1,46 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-    <h3>Listing Details :</h3>
-    <ul>
-        <li> <%= listing.title %> </li>
-        <li> <%= listing.description %> </li>
-        <li> &#8377; <%= listing.price.toLocaleString("en-IN") %> </li>
-        <li> <%= listing.country %> </li>
-        <li> <%= listing.location %> </li>
+    
+    <div id="show">
+        <h1>Listing Details</h1>
 
-        <form action="/listings/<%= listing._id %>/edit">
-            <button>Edit</button>
-        </form>
+        <div class="image">
+            <img src="<%= listing.image %>">
+        </div>
 
-        <form method="POST" action="/listings/<%= listing.id %>?_method=DELETE">
-            <button>Delete</button>
-        </form>
-    </ul>
+        <div class="title">
+            <p><b>Title</b></p>
+            <span><%= listing.title %></span>
+        </div>
+
+        <div class="description">
+            <span><%= listing.description %></span>
+        </div>
+
+        <div class="price">
+            <p><b>Price</b></p>
+            <span> &#8377; <%= listing.price.toLocaleString("en-IN") %> /Night</span>
+        </div>
+
+        <div class="location">
+            <p><b>Location</b></p>
+            <span><%= listing.location %></span>
+        </div>
+
+        <div class="country">
+            <p><b>Country</b></p>
+            <span><%= listing.country %></span>
+        </div>
+
+        <div class="buttons">
+            <form action="/listings/<%= listing._id %>/edit">
+                <button id="btn">Edit</button>
+            </form>
+    
+            <form method="POST" action="/listings/<%= listing.id %>?_method=DELETE">
+                <button id="btn" class="black">Delete</button>
+            </form>
+        </div>
+        
+    </div>
 </body>

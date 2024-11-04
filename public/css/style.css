@@ -104,8 +104,8 @@
 .cards{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     font-family: "Plus Jakarta Sans", sans-serif ;
+    gap: 2rem;
 }
 
 .card-image{
