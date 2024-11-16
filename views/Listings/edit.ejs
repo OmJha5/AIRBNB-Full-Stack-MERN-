@@ -2,39 +2,39 @@
 
 <body>
 
-    <form action="/listings/<%= listing._id %>?_method=PATCH" method="POST">
+    <form action="/listings/<%= listing._id %>?_method=PATCH" method="POST" class="needs-validation" novalidate>
         <h1>Edit Your Listing</h1>
 
         <div class="title">
-            <label for="title">Title</label> <br>
-            <input name="Listing[title]" id="title" type="text" placeholder="Enter Title" value="<%= listing.title %>"> 
+            <label for="title" class="form-label">Title</label> <br>
+            <input name="Listing[title]" id="title" type="text" placeholder="Enter Title" value="<%= listing.title %>" class="form-control" required> 
         </div>
 
         <div class="description">
-            <label for="desc">Description</label> <br>
-            <textarea name="Listing[description]" placeholder="Enter Description" id="desc" rows="3"> <%= listing.description %></textarea>
+            <label for="desc" class="form-label">Description</label> <br>
+            <textarea name="Listing[description]" placeholder="Enter Description" id="desc" rows="3" class="form-control" required> <%= listing.description %></textarea>
         </div>
 
         <div class="image">
-            <label for="image">Image</label> <br>
-            <input type="url" name="Listing[image]" placeholder="Enter URL of Image" id="image" value="<%= listing.image %>">
+            <label for="image" class="form-label">Image</label> <br>
+            <input type="url" name="Listing[image]" placeholder="Enter URL of Image" id="image" value="<%= listing.image %>" class="form-control" required>
         </div>
 
         <div class="priceAndCountry">
             <span class="price">
-                <label for="price">Price</label>
-                <input name="Listing[price]" type="text" placeholder="Enter Price" id="price"  value="<%= listing.price %>"> 
+                <label for="price" class="form-label">Price</label>
+                <input name="Listing[price]" type="text" placeholder="Enter Price" id="price"  value="<%= listing.price %>" class="form-control" required> 
             </span>
 
             <span class="country">
-                <label for="country">Country</label>
-                <input name="Listing[country]" type="text" placeholder="Enter Country" id="country" value="<%= listing.country %>"> <br>
+                <label for="country" class="form-label">Country</label>
+                <input name="Listing[country]" type="text" placeholder="Enter Country" id="country" value="<%= listing.country %>" class="form-control" required> <br>
             </span>
         </div>
 
         <div class="location">
-            <label for="location">Location</label> <br>
-            <input name="Listing[location]" type="text" placeholder="Enter Location" id="location" value="<%= listing.location %>">
+            <label for="location" class="form-label">Location</label> <br>
+            <input name="Listing[location]" type="text" placeholder="Enter Location" id="location" value="<%= listing.location %>" class="form-control" required>
         </div>
 
         <button id="btn">Edit</button>

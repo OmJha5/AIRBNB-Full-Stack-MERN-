@@ -40,6 +40,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 0rem !important;
 }
 
 #navbar li a{
@@ -52,7 +53,7 @@
     color: red;
 }
 
-.container{
+.contain{
     max-width: 90vw;
     margin: auto;
 }

@@ -2,43 +2,47 @@
 
 <body>
     
-
-    <form action="/listings" method="POST">
+    <form action="/listings" method="POST" class="needs-validation" novalidate>
         <h1>Create New Listing</h1>
 
         <div class="title">
-            <label for="title">Title</label> <br>
-            <input name="Listing[title]" id="title" type="text" placeholder="Enter Title"> 
+            <label for="title" class="form-label">Title</label> <br>
+            <input name="Listing[title]" id="title" type="text" placeholder="Enter Title"  class="form-control" required> 
+            <div class="invalid-feedback">Please Enter Correct Title</div>
         </div>
 
         <div class="description">
-            <label for="desc">Description</label> <br>
-            <textarea name="Listing[description]" placeholder="Enter Description" id="desc" rows="3"></textarea>
+            <label for="desc" class="form-label">Description</label> <br>
+            <textarea name="Listing[description]" placeholder="Enter Description" id="desc" rows="3"  class="form-control" required></textarea>
+            <div class="invalid-feedback">Please Enter Description</div>
         </div>
 
         <div class="image">
-            <label for="image">Image</label> <br>
-            <input type="url" name="Listing[image]" placeholder="Enter URL of Image" id="image">
+            <label for="image" class="form-label">Image</label> <br>
+            <input type="url" name="Listing[image]" placeholder="Enter URL of Image" id="image"  class="form-control" required>
+            <div class="invalid-feedback">Please Enter Image URL</div>
         </div>
 
         <div class="priceAndCountry">
             <span class="price">
-                <label for="price">Price</label>
-                <input name="Listing[price]" type="text" placeholder="Enter Price" id="price"> 
+                <label for="price" class="form-label">Price</label>
+                <input name="Listing[price]" type="text" placeholder="Enter Price" id="price"  class="form-control" required> 
+                <div class="invalid-feedback">Please Enter Price</div>
             </span>
 
             <span class="country">
-                <label for="country">Country</label>
-                <input name="Listing[country]" type="text" placeholder="Enter Country" id="country"> <br>
+                <label for="country" class="form-label">Country</label>
+                <input name="Listing[country]" type="text" placeholder="Enter Country" id="country"  class="form-control" required> <br>
             </span>
         </div>
 
         <div class="location">
-            <label for="location">Location</label> <br>
-            <input name="Listing[location]" type="text" placeholder="Enter Location" id="location">
+            <label for="location" class="form-label">Location</label> <br>
+            <input name="Listing[location]" type="text" placeholder="Enter Location" id="location"  class="form-control" required>
+            <div class="invalid-feedback">Please Enter The Location</div>
         </div>
 
-        <button id="btn">Create</button>
+        <button id="btn" type="submit">Create</button>
     </form>
 
 </body>
