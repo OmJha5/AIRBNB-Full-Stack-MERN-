@@ -7,6 +7,7 @@ const path = require("path")
 const ejsMate = require("ejs-mate");
 let wrapAsync = require("./utils/wrapAsync.js")
 let ExpressError = require("./utils/ExpressError.js")
+let listingSchema = require("./schema.js")
 
 app.set("view engine" , "ejs");
 app.set("views" , path.join(__dirname , "views"));
@@ -49,10 +50,14 @@ app.get("/listings/:id" , async (req , res) => {
     res.render("Listings/show.ejs" , { listing , page : "show" });
 })
 
-app.post("/listings" , wrapAsync((req , res , next) => {
+app.post("/listings" , wrapAsync(async(req , res , next) => {
     if(req.body.Listing == undefined) next(new ExpressError(400 , "Send Valid Data For Listing")) // Bad Request.
+    const result = listingSchema.validate(req.body)
+    if(result.error){
+        throw new ExpressError(404 , "Schema validation failed.")
+    }
     const newListing = new Listing(req.body.Listing)
-    newListing.save()
+    await newListing.save()
     res.redirect("/listings");
 }));
 
