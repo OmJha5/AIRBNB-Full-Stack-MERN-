@@ -29,6 +29,14 @@ async function main(){
     return await mongoose.connect(MONGO_URL);
 }
 
+function validateListing(req , res , next){
+    const result = listingSchema.validate(req.body)
+    if(result.error){
+        throw new ExpressError(404 , "Schema validation failed.")
+    }
+    else next();
+}
+
 app.get("/" , (req , res) => {
     res.send("Root is running..")
 })
@@ -50,12 +58,8 @@ app.get("/listings/:id" , async (req , res) => {
     res.render("Listings/show.ejs" , { listing , page : "show" });
 })
 
-app.post("/listings" , wrapAsync(async(req , res , next) => {
+app.post("/listings" , validateListing,  wrapAsync(async(req , res , next) => {
     if(req.body.Listing == undefined) next(new ExpressError(400 , "Send Valid Data For Listing")) // Bad Request.
-    const result = listingSchema.validate(req.body)
-    if(result.error){
-        throw new ExpressError(404 , "Schema validation failed.")
-    }
     const newListing = new Listing(req.body.Listing)
     await newListing.save()
     res.redirect("/listings");
@@ -67,7 +71,7 @@ app.get("/listings/:id/edit" , wrapAsync(async (req , res) => {
     res.render("Listings/edit.ejs" , {listing , page : "edit"});
 }))
 
-app.patch("/listings/:id" , wrapAsync(async (req , res , next) => {
+app.patch("/listings/:id" , validateListing , wrapAsync(async (req , res , next) => {
     if(req.body.Listing == undefined) next(new ExpressError(400 , "Send Valid Data For Listing"))
     const {id} = req.params;
     await Listing.findByIdAndUpdate(id , {...req.body.Listing});
