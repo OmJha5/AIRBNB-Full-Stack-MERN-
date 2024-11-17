@@ -5,6 +5,8 @@ const methodOverride = require("method-override")
 const Listing = require("./models/listing.js")
 const path = require("path")
 const ejsMate = require("ejs-mate");
+let wrapAsync = require("./utils/wrapAsync.js")
+let ExpressError = require("./utils/ExpressError.js")
 
 app.set("view engine" , "ejs");
 app.set("views" , path.join(__dirname , "views"));
@@ -47,30 +49,41 @@ app.get("/listings/:id" , async (req , res) => {
     res.render("Listings/show.ejs" , { listing , page : "show" });
 })
 
-app.post("/listings" , (req , res) => {
+app.post("/listings" , wrapAsync((req , res , next) => {
+    if(req.body.Listing == undefined) next(new ExpressError(400 , "Send Valid Data For Listing")) // Bad Request.
     const newListing = new Listing(req.body.Listing)
     newListing.save()
     res.redirect("/listings");
-})
+}));
 
-app.get("/listings/:id/edit" , async (req , res) => {
+app.get("/listings/:id/edit" , wrapAsync(async (req , res) => {
     const {id} = req.params;
     const listing = await Listing.findById(id);
     res.render("Listings/edit.ejs" , {listing , page : "edit"});
-})
+}))
 
-app.patch("/listings/:id" , async (req , res) => {
+app.patch("/listings/:id" , wrapAsync(async (req , res , next) => {
+    if(req.body.Listing == undefined) next(new ExpressError(400 , "Send Valid Data For Listing"))
     const {id} = req.params;
     await Listing.findByIdAndUpdate(id , {...req.body.Listing});
 
     res.redirect(`/listings/${id}`);
-})
+}))
 
-app.delete("/listings/:id" , async (req , res) => {
+app.delete("/listings/:id" , wrapAsync(async (req , res) => {
     const {id} = req.params;
     await Listing.findByIdAndDelete(id);
 
     res.redirect("/listings");
+}))
+
+app.all("*" , (req , res , next) => {
+    next(new ExpressError(404 , "Page Not Found!"));
+})
+
+app.use((err , req , res , next) => {
+    let {status = 500 , message = "Something Went Wrong!"} = err;
+    res.status(status).send(message);
 })
 
 app.listen(8080 , () => {
