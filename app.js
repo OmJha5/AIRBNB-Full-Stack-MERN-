@@ -2,14 +2,11 @@ const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
 const methodOverride = require("method-override")
-const Listing = require("./models/listing.js")
-const Review = require("./models/review.js")
 const path = require("path")
 const ejsMate = require("ejs-mate");
-let wrapAsync = require("./utils/wrapAsync.js")
 let ExpressError = require("./utils/ExpressError.js")
-let {reviewSchema , listingSchema} = require("./schema.js")
 let listingRouter = require("./router/listing.js");
+let reviewRouter = require("./router/review.js")
 
 app.set("view engine" , "ejs");
 app.set("views" , path.join(__dirname , "views"));
@@ -32,42 +29,11 @@ async function main(){
 }
 
 app.use("/listings" , listingRouter)
-
-function validateReview(req , res , next){
-    console.log(req.body)
-    const result = reviewSchema.validate(req.body)
-    if(result.error){
-        throw new ExpressError(404 , "Schema validation failed.")
-    }
-    else next();
-}
+app.use("/listings/:id/reviews" , reviewRouter)
 
 app.get("/" , (req , res) => {
     res.send("Root is running..")
 })
-
-
-// Reviews Route
-app.post("/listings/:id/reviews" , validateReview , wrapAsync(async (req , res) => {
-    let {id} = req.params;
-    let listing = await Listing.findById(id);
-    let newReview = await new Review(req.body.reviews)
-
-    listing.review.push(newReview);
-
-    await listing.save();
-    await newReview.save();
-
-    res.redirect(`/listings/${id}`);
-}))
-
-app.delete("/listings/:id/reviews/:reviewId" , wrapAsync(async (req , res) => {
-    let {id , reviewId} = req.params;
-    await Listing.findByIdAndUpdate(id , {$pull : {review : reviewId}})
-    await Review.findByIdAndDelete(reviewId);
-
-    res.redirect(`/listings/${id}`)
-}))
 
 app.all("*" , (req , res , next) => {
     next(new ExpressError(404 , "Page Not Found!"));

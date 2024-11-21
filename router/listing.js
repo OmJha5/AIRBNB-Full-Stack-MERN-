@@ -1,5 +1,4 @@
 const express = require("express")
-const app = express()
 const router = express.Router()
 let {listingSchema} = require("../schema.js")
 let wrapAsync = require("../utils/wrapAsync.js")
