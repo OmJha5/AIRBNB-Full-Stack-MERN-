@@ -9,6 +9,7 @@ const ejsMate = require("ejs-mate");
 let wrapAsync = require("./utils/wrapAsync.js")
 let ExpressError = require("./utils/ExpressError.js")
 let {reviewSchema , listingSchema} = require("./schema.js")
+let listingRouter = require("./router/listing.js");
 
 app.set("view engine" , "ejs");
 app.set("views" , path.join(__dirname , "views"));
@@ -30,14 +31,7 @@ async function main(){
     return await mongoose.connect(MONGO_URL);
 }
 
-function validateListing(req , res , next){
-    
-    const result = listingSchema.validate(req.body)
-    if(result.error){
-        throw new ExpressError(404 , "Schema validation failed.")
-    }
-    else next();
-}
+app.use("/listings" , listingRouter)
 
 function validateReview(req , res , next){
     console.log(req.body)
@@ -52,50 +46,6 @@ app.get("/" , (req , res) => {
     res.send("Root is running..")
 })
 
-// It will show all the listings.
-app.get("/listings" , async (req , res) => {
-    const allListings = await Listing.find({});
-    res.render("Listings/index.ejs" , { allListings });
-})
-
-app.get("/listings/new" , (req , res) => {
-    res.render("Listings/new.ejs" , {page : "new"});
-})
-
-// It will show a specific listing details
-app.get("/listings/:id" , async (req , res) => {
-    const {id} = req.params;
-    const listing = await Listing.findById(id).populate("review");
-    res.render("Listings/show.ejs" , { listing , page : "show" });
-})
-
-app.post("/listings" , validateListing,  wrapAsync(async(req , res , next) => {
-    if(req.body.Listing == undefined) next(new ExpressError(400 , "Send Valid Data For Listing")) // Bad Request.
-    const newListing = new Listing(req.body.Listing)
-    await newListing.save()
-    res.redirect("/listings");
-}));
-
-app.get("/listings/:id/edit" , wrapAsync(async (req , res) => {
-    const {id} = req.params;
-    const listing = await Listing.findById(id);
-    res.render("Listings/edit.ejs" , {listing , page : "edit"});
-}))
-
-app.patch("/listings/:id" , validateListing , wrapAsync(async (req , res , next) => {
-    if(req.body.Listing == undefined) next(new ExpressError(400 , "Send Valid Data For Listing"))
-    const {id} = req.params;
-    await Listing.findByIdAndUpdate(id , {...req.body.Listing});
-
-    res.redirect(`/listings/${id}`);
-}))
-
-app.delete("/listings/:id" , wrapAsync(async (req , res) => {
-    const {id} = req.params;
-    await Listing.findByIdAndDelete(id);
-
-    res.redirect("/listings");
-}))
 
 // Reviews Route
 app.post("/listings/:id/reviews" , validateReview , wrapAsync(async (req , res) => {
