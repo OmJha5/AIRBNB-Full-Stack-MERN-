@@ -3,42 +3,45 @@
     
     <div id="show">
 
-        <div class="image">
-            <img src="<%= listing.image %>">
+        <div class="show-image">
+            <div class="title">
+                <span><%= listing.title %></span>
+            </div>
+            
+            <div class="image">
+                <img src="<%= listing.image %>">
+            </div>
         </div>
 
-        <div class="title">
-            <p><b>Title</b></p>
-            <span><%= listing.title %></span>
-        </div>
-
-        <div class="description">
-            <span><%= listing.description %></span>
-        </div>
-
-        <div class="price">
-            <p><b>Price</b></p>
-            <span> &#8377; <%= listing.price.toLocaleString("en-IN") %> /Night</span>
-        </div>
-
-        <div class="location">
-            <p><b>Location</b></p>
-            <span><%= listing.location %></span>
-        </div>
-
-        <div class="country">
-            <p><b>Country</b></p>
-            <span><%= listing.country %></span>
-        </div>
-
-        <div class="buttons">
-            <form action="/listings/<%= listing._id %>/edit">
-                <button id="btn">Edit</button>
-            </form>
+        <div class="show-info">
+            <div class="description">
+                <span><%= listing.description %></span>
+            </div>
     
-            <form method="POST" action="/listings/<%= listing.id %>?_method=DELETE">
-                <button id="btn" class="black">Delete</button>
-            </form>
+            <div class="price">
+                <p><b>Price</b></p>
+                <span> &#8377; <%= listing.price.toLocaleString("en-IN") %> /Night</span>
+            </div>
+    
+            <div class="location">
+                <p><b>Location</b></p>
+                <span><%= listing.location %></span>
+            </div>
+    
+            <div class="country">
+                <p><b>Country</b></p>
+                <span><%= listing.country %></span>
+            </div>
+    
+            <div class="buttons">
+                <form action="/listings/<%= listing._id %>/edit">
+                    <button id="btn">Edit</button>
+                </form>
+        
+                <form method="POST" action="/listings/<%= listing.id %>?_method=DELETE">
+                    <button id="btn" class="black">Delete</button>
+                </form>
+            </div>
         </div>
         
     </div>
@@ -63,6 +66,17 @@
             </div>
             <button>Submit</button>
         </form>
+    </div>
+    
+    <div class="renderReview">
+        <h1>All Reviews</h1>
+        
+        <ul>
+            <% for(review of listing.review) { %>
+                <li><%= review.comment %> and <%= review.rating %> stars</li>
+            <% } %>
+        </ul>
+
     </div>
 
     
