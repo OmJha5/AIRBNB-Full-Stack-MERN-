@@ -1,3 +1,7 @@
+*{
+    line-height: 1.5;
+}
+
 h1{
     margin: 0rem 0rem 1rem 0rem;
     font-weight: 600;
@@ -19,10 +23,6 @@ h1{
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
-
-p{
-    display: inline-block ;
     margin-right: 0.25rem;
 }
 
@@ -64,7 +64,7 @@ p{
 }
 
 #review , .renderReview{
-    padding: 2rem 0px;
+    padding: 1.5rem 0px;
 }
 
 .feedback{
@@ -77,6 +77,19 @@ p{
     font-size: 1.5rem;
 }
 
-.description span{
-    line-height: 1.5;
+
+.reviewCard{
+    background-color: antiquewhite;
+    margin: 1rem 1rem 1rem 0rem;
+    padding: 20px 15px;
+    font-family: "Plus Jakarta Sans", sans-serif ;
+}
+
+.reviewCards{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.reviewCard p{
+    margin: 8px 0px;
 }

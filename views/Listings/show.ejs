@@ -7,7 +7,7 @@
             <div class="title">
                 <span><%= listing.title %></span>
             </div>
-            
+
             <div class="image">
                 <img src="<%= listing.image %>">
             </div>
@@ -64,18 +64,23 @@
                 <label for="feedback">your Feedback</label>
                 <textarea name="reviews[comment]" id="feedback" rows="10" cols="20" required></textarea>
             </div>
-            <button>Submit</button>
+            <button id="btn" style="background-color : #c08ffc; color : black;">Submit</button>
         </form>
     </div>
     
     <div class="renderReview">
         <h1>All Reviews</h1>
-        
-        <ul>
+
+        <div class="reviewCards">
+
             <% for(review of listing.review) { %>
-                <li><%= review.comment %> and <%= review.rating %> stars</li>
+                <div class="reviewCard">
+                    <p><b>Feedback</b> &nbsp; <%= review.comment %></p>
+                    <p><b>Rating &nbsp; <%= review.rating %></b> stars</p>
+                </div>
             <% } %>
-        </ul>
+
+        </div>
 
     </div>
 
