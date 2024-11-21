@@ -8,7 +8,7 @@ const path = require("path")
 const ejsMate = require("ejs-mate");
 let wrapAsync = require("./utils/wrapAsync.js")
 let ExpressError = require("./utils/ExpressError.js")
-let listingSchema = require("./schema.js")
+let {reviewSchema , listingSchema} = require("./schema.js")
 
 app.set("view engine" , "ejs");
 app.set("views" , path.join(__dirname , "views"));
@@ -31,7 +31,17 @@ async function main(){
 }
 
 function validateListing(req , res , next){
+    
     const result = listingSchema.validate(req.body)
+    if(result.error){
+        throw new ExpressError(404 , "Schema validation failed.")
+    }
+    else next();
+}
+
+function validateReview(req , res , next){
+    console.log(req.body)
+    const result = reviewSchema.validate(req.body)
     if(result.error){
         throw new ExpressError(404 , "Schema validation failed.")
     }
@@ -88,7 +98,7 @@ app.delete("/listings/:id" , wrapAsync(async (req , res) => {
 }))
 
 // Reviews Route
-app.post("/listings/:id/reviews" , async (req , res) => {
+app.post("/listings/:id/reviews" , validateReview , wrapAsync(async (req , res) => {
     let {id} = req.params;
     let listing = await Listing.findById(id);
     let newReview = await new Review(req.body.reviews)
@@ -99,7 +109,7 @@ app.post("/listings/:id/reviews" , async (req , res) => {
     await newReview.save();
 
     res.redirect(`/listings/${id}`);
-})
+}))
 
 app.all("*" , (req , res , next) => {
     next(new ExpressError(404 , "Page Not Found!"));

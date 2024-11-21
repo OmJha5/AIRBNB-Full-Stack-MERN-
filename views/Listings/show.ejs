@@ -2,7 +2,6 @@
 <body>
     
     <div id="show">
-        <h1>Listing Details</h1>
 
         <div class="image">
             <img src="<%= listing.image %>">
@@ -60,7 +59,7 @@
             </div>
             <div class="feedback">
                 <label for="feedback">your Feedback</label>
-                <textarea name="reviews[comment]" id="feedback" rows="10" cols="20"></textarea>
+                <textarea name="reviews[comment]" id="feedback" rows="10" cols="20" required></textarea>
             </div>
             <button>Submit</button>
         </form>

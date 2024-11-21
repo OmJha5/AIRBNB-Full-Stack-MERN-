@@ -1,15 +1,15 @@
 h1{
-    margin: 0rem 0rem 1rem 0rem !important;
+    margin: 0rem 0rem 1rem 0rem;
     font-weight: 600;
 }
 
 #show{
     margin: 2rem auto;
-    width: 75%;
+    width: 75% ;
 }
 
 p{
-    display: inline-block;
+    display: inline-block ;
     margin-right: 0.25rem;
 }
 
