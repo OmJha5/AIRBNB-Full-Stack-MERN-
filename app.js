@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require("mongoose")
 const methodOverride = require("method-override")
 const Listing = require("./models/listing.js")
+const Review = require("./models/review.js")
 const path = require("path")
 const ejsMate = require("ejs-mate");
 let wrapAsync = require("./utils/wrapAsync.js")
@@ -85,6 +86,20 @@ app.delete("/listings/:id" , wrapAsync(async (req , res) => {
 
     res.redirect("/listings");
 }))
+
+// Reviews Route
+app.post("/listings/:id/reviews" , async (req , res) => {
+    let {id} = req.params;
+    let listing = await Listing.findById(id);
+    let newReview = await new Review(req.body.reviews)
+
+    listing.review.push(newReview);
+
+    await listing.save();
+    await newReview.save();
+
+    res.redirect(`/listings/${id}`);
+})
 
 app.all("*" , (req , res , next) => {
     next(new ExpressError(404 , "Page Not Found!"));

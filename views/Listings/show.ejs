@@ -44,5 +44,27 @@
         
     </div>
 
+    <hr>
+
+    <div id="review">
+        <form action="/listings/<%= listing._id %>/reviews" method="POST">
+            <div class="rating">
+                <label for="rating">your Rating</label>
+                <select id="rating" name = "reviews[rating]">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="feedback">
+                <label for="feedback">your Feedback</label>
+                <textarea name="reviews[comment]" id="feedback" rows="10" cols="20"></textarea>
+            </div>
+            <button>Submit</button>
+        </form>
+    </div>
+
     
 </body>

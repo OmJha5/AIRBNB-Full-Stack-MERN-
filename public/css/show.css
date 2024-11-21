@@ -5,8 +5,7 @@ h1{
 
 #show{
     margin: 2rem auto;
-    width: 60%;
-    height: 100vh;
+    width: 75%;
 }
 
 p{
@@ -15,8 +14,8 @@ p{
 }
 
 .image{
-    height: 40%;
     width: 65%;
+    height: 45vh;
     margin-bottom: 0.9rem;
 }
 
@@ -49,4 +48,16 @@ p{
 .buttons{
     display: flex;
     gap: 20px;
+}
+
+#review{
+    margin: 0px auto;
+    width: 75%;
+    padding: 2rem 0px;
+}
+
+.feedback{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0px;
 }
