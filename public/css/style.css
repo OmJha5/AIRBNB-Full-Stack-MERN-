@@ -123,6 +123,7 @@
 
 .card{
     margin: 1.5rem 0rem;
+    border: none;
 }
 
 .card-title{
