@@ -18,6 +18,7 @@ function validateListing(req , res , next){
 // It will show all the listings.
 router.get("/" , async (req , res) => {
     const allListings = await Listing.find({});
+    res.locals.success = req.flash("success");
     res.render("Listings/index.ejs" , { allListings });
 })
 
@@ -35,6 +36,7 @@ router.get("/:id" , async (req , res) => {
 router.post("/" , validateListing,  wrapAsync(async(req , res , next) => {
     if(req.body.Listing == undefined) next(new ExpressError(400 , "Send Valid Data For Listing")) // Bad Request.
     const newListing = new Listing(req.body.Listing)
+    req.flash("success" , "New Listing Created!");
     await newListing.save()
     res.redirect("/listings");
 }));

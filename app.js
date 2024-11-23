@@ -7,6 +7,8 @@ const ejsMate = require("ejs-mate");
 let ExpressError = require("./utils/ExpressError.js")
 let listingRouter = require("./router/listing.js");
 let reviewRouter = require("./router/review.js")
+let session = require("express-session")
+let flash = require("connect-flash");
 
 app.set("view engine" , "ejs");
 app.set("views" , path.join(__dirname , "views"));
@@ -27,6 +29,18 @@ main().then((res) => {
 async function main(){
     return await mongoose.connect(MONGO_URL);
 }
+
+app.use(session({
+    secret : "mysecretcode",
+    resave : false,
+    saveUninitialized : true,
+    cookie : {
+        expires : Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge : 7 * 24 * 60 * 60 * 1000,
+    }
+}))
+
+app.use(flash())
 
 app.use("/listings" , listingRouter)
 app.use("/listings/:id/reviews" , reviewRouter)
