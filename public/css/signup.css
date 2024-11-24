@@ -1,0 +1,49 @@
+.signup{
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    margin: 4rem auto;
+    background: antiquewhite;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.username , .email , .password{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin : 1rem 0rem;
+}
+
+body{
+    height: 100vh;
+}
+
+.contain{
+    position: relative;
+    height: 100%;
+}
+
+footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+#btn{
+    font-size: 1rem;
+    padding: 5px 16px;
+    margin: 0.9rem 0rem;
+    border-radius: 0.3rem;
+    border: 1px solid grey;
+    background: #ff6969;
+    color: white;
+    cursor: pointer;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+input{
+    border-radius: 0.2rem;
+    border: 1px solid black;
+    padding: 4px 6px;
+}
