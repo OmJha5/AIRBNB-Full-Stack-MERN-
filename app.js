@@ -7,8 +7,12 @@ const ejsMate = require("ejs-mate");
 let ExpressError = require("./utils/ExpressError.js")
 let listingRouter = require("./router/listing.js");
 let reviewRouter = require("./router/review.js")
+let userRouter = require("./router/user.js")
 let session = require("express-session")
 let flash = require("connect-flash");
+let passport = require("passport")
+let LocalStrategy = require("passport-local")
+const User = require("./models/user.js")
 
 app.set("view engine" , "ejs");
 app.set("views" , path.join(__dirname , "views"));
@@ -42,8 +46,16 @@ app.use(session({
 
 app.use(flash())
 
+app.use(passport.initialize());
+app.use(passport.session())
+passport.use(new LocalStrategy(User.authenticate()))
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use("/listings" , listingRouter)
 app.use("/listings/:id/reviews" , reviewRouter)
+app.use("/" , userRouter)
 
 app.get("/" , (req , res) => {
     res.send("Root is running..")
