@@ -29,6 +29,8 @@
     border-bottom: 1px solid #e0d6d6;
     font-family: 'Poppins', sans-serif;
     z-index: 1;
+    width: 100%;
+    justify-content: space-between;
 }
 
 #navbar li{
@@ -41,6 +43,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 0rem !important;
+    padding-left: unset;
 }
 
 #navbar li a{
@@ -49,13 +52,26 @@
     transition: color 0.3s ease-in;
 }
 
-#navbar li a:hover{
+#navbar li a:hover , .credentials a:hover{
     color: red;
 }
 
 .contain{
     max-width: 90vw;
     margin: auto;
+}
+
+.right{
+    display: flex;
+    align-items: center;
+}
+
+.credentials a{
+    text-decoration: none;
+    color: black;
+    font-size: 1.1rem;
+    margin: 0rem 0.5rem;
+    transition: color 0.3s ease-in;
 }
 
 /* Footer */
@@ -131,8 +147,8 @@
 }
 
 main h1{
-    margin: 10px 0px 0px 0px;
     font-family: "Plus Jakarta Sans", sans-serif ;
+    margin: 1rem 0rem;
 }
 
 .cards a{
@@ -143,3 +159,4 @@ main h1{
 .card-image img:hover{
     opacity: 0.85;
 }
+

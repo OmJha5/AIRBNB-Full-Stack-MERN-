@@ -12,7 +12,6 @@ router.get("/signup" , (req , res) => {
 router.post("/signup" , async(req , res) => {
     try{
         const {username , email , password} = req.body;
-        console.log(username , email , password);
         let newUser = new User({
             email : email,
             username : username,
@@ -37,6 +36,14 @@ router.get("/login" , (req , res) => {
 router.post("/login" , passport.authenticate("local" , {failureRedirect : "/login" , failureFlash : true}) , async(req , res) => {
     req.flash("success" , "Welcome to Wanderlust!")
     res.redirect("/listings")
+})
+
+router.get("/logout" , (req , res , next) => {
+    req.logout((err) => {
+        if(err) next(err);
+        req.flash("success" , "Logged out successfully");
+        res.redirect("/listings");
+    })
 })
 
 module.exports = router;
