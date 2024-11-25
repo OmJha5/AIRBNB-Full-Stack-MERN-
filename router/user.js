@@ -18,8 +18,11 @@ router.post("/signup" , async(req , res) => {
         })
 
         await User.register(newUser , password);
-        req.flash("success" , "Signed Up Successfully , Please Login Now!")
-        res.redirect("/login")
+        req.login(newUser , (err) => {
+            if(err) next(err);
+            req.flash("success" , "Welcome To Wanderlust!")
+            res.redirect("/listings")
+        })
     }
     catch(e){
         req.flash("error" , e.message)
