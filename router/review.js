@@ -1,18 +1,10 @@
 const express = require("express")
 const router = express.Router({mergeParams : true})
 let wrapAsync = require("../utils/wrapAsync.js")
-let ExpressError = require("../utils/ExpressError.js")
-let {reviewSchema} = require("../schema.js")
+let ExpressError = require("../utils/ExpressError.js");
 const Listing = require("../models/listing.js")
 const Review = require("../models/review.js")
-
-function validateReview(req , res , next){
-    const result = reviewSchema.validate(req.body)
-    if(result.error){
-        throw new ExpressError(404 , "Schema validation failed.")
-    }
-    else next();
-}
+const {validateReview} = require("../middleware.js")
 
 // Reviews Route
 router.post("/" , validateReview , wrapAsync(async (req , res) => {

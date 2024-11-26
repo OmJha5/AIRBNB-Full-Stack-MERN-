@@ -37,15 +37,18 @@
                 <span><%= listing.country %></span>
             </div>
     
-            <div class="buttons">
-                <form action="/listings/<%= listing._id %>/edit">
-                    <button id="btn">Edit</button>
-                </form>
-        
-                <form method="POST" action="/listings/<%= listing.id %>?_method=DELETE">
-                    <button id="btn" class="black">Delete</button>
-                </form>
-            </div>
+            <% if( typeof currUser != 'undefined' && currUser._id.equals(listing.owner._id)) { %>
+                <div class="buttons">
+                    <form action="/listings/<%= listing._id %>/edit">
+                        <button id="btn">Edit</button>
+                    </form>
+            
+                    <form method="POST" action="/listings/<%= listing.id %>?_method=DELETE">
+                        <button id="btn" class="black">Delete</button>
+                    </form>
+                </div>
+            <% } %>
+
         </div>
         
     </div>
