@@ -1,6 +1,7 @@
 let Listing = require("./models/listing.js")
 let {reviewSchema} = require("./schema.js")
 let {listingSchema} = require("./schema.js")
+let Review = require("./models/review.js")
 
 module.exports.isLoggedIn = (req , res , next) => {
     req.session.redirectUrl = req.originalUrl;
@@ -45,4 +46,15 @@ module.exports.validateReview = (req , res , next) => {
         throw new ExpressError(404 , "Schema validation failed.")
     }
     else next();
+}
+
+module.exports.isReviewOwner = async (req , res , next) => {
+    const {id , reviewId} = req.params;
+    let review = await Review.findById(reviewId);
+
+    if(req.user && req.user._id.equals(review.author)) {
+        return next();
+    }
+    req.flash("error" , "You are not the author of this review!");
+    res.redirect(`/listings/${id}`)
 }
