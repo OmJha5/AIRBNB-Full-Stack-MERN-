@@ -2,6 +2,7 @@ let Listing = require("./models/listing.js")
 let {reviewSchema} = require("./schema.js")
 let {listingSchema} = require("./schema.js")
 let Review = require("./models/review.js")
+let ExpressError = require("./utils/ExpressError.js");
 
 module.exports.isLoggedIn = (req , res , next) => {
     req.session.redirectUrl = req.originalUrl;

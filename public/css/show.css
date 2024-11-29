@@ -2,7 +2,7 @@
     line-height: 1.5;
 }
 
-h1{
+h2{
     margin: 0rem 0rem 1rem 0rem;
     font-weight: 600;
 }
@@ -15,11 +15,11 @@ h1{
 }
 
 .show-image{
-    width : 60%;
+    width : 45%;
 }
 
 .show-info{
-    width: 40%;
+    width: 55%;
     margin-right: 0.25rem;
 }
 
@@ -36,6 +36,10 @@ h1{
 
 .image img , .price , .description , .location , .country , .title{
     margin-bottom: 0.9rem;
+    font-family: "Plus Jakarta Sans", sans-serif ;
+}
+
+label{
     font-family: "Plus Jakarta Sans", sans-serif ;
 }
 
@@ -74,6 +78,10 @@ h1{
     font-size: 1.5rem;
 }
 
+.owner span{
+    font-size: 1.1rem;
+}
+
 
 .reviewCard{
     background-color: antiquewhite;
@@ -89,4 +97,9 @@ h1{
 
 .reviewCard p{
     margin: 8px 0px;
+}
+
+.noReview h3{
+    text-align: center;
+    font-family: "Plus Jakarta Sans", sans-serif ;
 }
