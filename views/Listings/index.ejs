@@ -1,6 +1,89 @@
 <% layout("/layouts/boilerplate.ejs") %>
 <body>
-    <h1>Here is your listings.. </h1>
+    <!-- Filter options -->
+     <div class="header">
+        <div class="filters">
+            <div class="filter">
+                <div class="filter-image">
+                    <i class="fa-solid fa-fire"></i>
+                </div>
+                <div class="filter-info">Trending</div>
+            </div>
+
+            <div class="filter">
+                <div class="filter-image">
+                    <i class="fa-solid fa-bed"></i>
+                </div>
+                <div class="filter-info">Rooms</div>
+            </div>
+
+            <div class="filter">
+                <div class="filter-image">
+                    <i class="fa-solid fa-mountain-city"></i>
+                </div>
+                <div class="filter-info">Iconic City</div>
+            </div>
+
+            <div class="filter">
+                <div class="filter-image">
+                    <i class="fa-brands fa-fort-awesome"></i>
+                </div>
+                <div class="filter-info">Castles</div>
+            </div>
+            
+            <div class="filter">
+                <div class="filter-image">
+                    <i class="fa-solid fa-water-ladder"></i>
+                </div>
+                <div class="filter-info">Amazing Pools</div>
+            </div>
+
+            <div class="filter">
+                <div class="filter-image">
+                    <i class="fa-solid fa-campground"></i>
+                </div>
+                <div class="filter-info">Camping</div>
+            </div>
+
+            <div class="filter">
+                <div class="filter-image">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                </div>
+                <div class="filter-info">Beach</div>
+            </div>
+
+            <div class="filter">
+                <div class="filter-image">
+                    <i class="fa-solid fa-snowflake"></i>
+                </div>
+                <div class="filter-info">Arctic</div>
+            </div>
+            
+            <div class="filter">
+                <div class="filter-image">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                </div>
+                <div class="filter-info">Beach Front</div>
+            </div>
+
+            <div class="filter">
+                <div class="filter-image">
+                    <i class="fa-solid fa-landmark-dome"></i>
+                </div>
+                <div class="filter-info">Domes</div>
+            </div>
+
+
+        </div>
+
+        <div class="taxBtn">
+            <div class="form-check form-switch">
+                <input class="form-check-input switch" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Display Total After Taxes</label>
+            </div>
+        </div>
+
+     </div>
 
     <div class="cards">
 
@@ -12,12 +95,24 @@
                     </div>
                     <div class="card-details">
                         <div class="card-title"><b><%= listings.title %></b></div>
-                        <div class="card-price">&#8377; <%= listings.price.toLocaleString("en-IN") %> / Night</div>
+                        <div class="card-price">&#8377; <%= listings.price.toLocaleString("en-IN") %> / Night <span class="span hide"> &nbsp; + 18% GST</span></div>
                     </div>
                 </div>
             </a>
         <% } %>
 
     </div>
+    
+    <script>
+        let spans = document.getElementsByClassName("span");
+        let input = document.querySelector(".switch")
 
+        input.addEventListener("click" , (e) => {
+            
+            Array.from(spans).forEach((span) => {
+                span.classList.toggle("hide");
+            });
+        })
+
+    </script>
 </body>
