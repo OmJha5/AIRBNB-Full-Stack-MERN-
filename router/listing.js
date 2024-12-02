@@ -17,7 +17,7 @@ router.get("/new" , isLoggedIn , wrapAsync(listingController.newListingForm));
 
 router.route("/:id")
     .get(wrapAsync(listingController.show))
-    .patch(isLoggedIn , validateListing , isOwner , wrapAsync(listingController.editRoute))
+    .patch(isLoggedIn , upload.single('Listing[image]') , validateListing , isOwner , wrapAsync(listingController.editRoute))
     .delete(isLoggedIn , isOwner, wrapAsync(listingController.destroyRoute))
 
 

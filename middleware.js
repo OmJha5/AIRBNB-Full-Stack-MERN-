@@ -35,6 +35,7 @@ module.exports.isOwner = async (req , res , next) => {
 module.exports.validateListing = (req , res , next) => {
     
     const result = listingSchema.validate(req.body)
+
     if(result.error){
         throw new ExpressError(404 , "Schema validation failed.")
     }

@@ -2,7 +2,7 @@
 
 <body>
 
-    <form action="/listings/<%= listing._id %>?_method=PATCH" method="POST" class="needs-validation" novalidate>
+    <form action="/listings/<%= listing._id %>?_method=PATCH" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
         <h1>Edit Your Listing</h1>
 
         <div class="title">
@@ -16,8 +16,8 @@
         </div>
 
         <div class="image">
-            <label for="image" class="form-label">Image</label> <br>
-            <input type="url" name="Listing[image]" placeholder="Enter URL of Image" id="image" value="<%= listing.image %>" class="form-control" required>
+            <label for="image" class="form-label">Upload New Image</label> <br>
+            <input type="file" name="Listing[image]"  id="image" class="form-control" required>
         </div>
 
         <div class="priceAndCountry">

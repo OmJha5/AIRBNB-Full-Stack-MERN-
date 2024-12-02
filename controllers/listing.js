@@ -60,8 +60,18 @@ module.exports.editForm = async (req , res) => {
 module.exports.editRoute = async (req , res , next) => {
     if(req.body.Listing == undefined) next(new ExpressError(400 , "Send Valid Data For Listing"))
     const {id} = req.params;
+
+    console.log("Yes");
     
-    await Listing.findByIdAndUpdate(id , {...req.body.Listing});
+    console.log(req.file)
+    const listing = await Listing.findByIdAndUpdate(id , {...req.body.Listing});
+    if(typeof req.file != 'undefined'){
+        let url = req.file.path;
+        let filename = req.file.filename;
+        listing.image = {url , filename};
+        await listing.save()
+    }
+
     req.flash("success" , "Listing is Updated!")
 
     res.redirect(`/listings/${id}`);
