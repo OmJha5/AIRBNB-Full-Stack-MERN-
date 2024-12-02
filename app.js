@@ -11,6 +11,7 @@ let listingRouter = require("./router/listing.js");
 let reviewRouter = require("./router/review.js")
 let userRouter = require("./router/user.js")
 let session = require("express-session")
+let MongoStore = require("connect-mongo")
 let flash = require("connect-flash");
 let passport = require("passport")
 let LocalStrategy = require("passport-local")
@@ -45,7 +46,15 @@ app.use(session({
     cookie : {
         expires : Date.now() + 7 * 24 * 60 * 60 * 1000,
         maxAge : 7 * 24 * 60 * 60 * 1000,
-    }
+    },
+
+    store : MongoStore.create({
+        mongoUrl : MONGO_URL,
+        crypto : {
+            secret : "mysecretcode",
+        },
+        touchafter : 24 * 3600
+    })
 }))
 
 app.use(flash())
