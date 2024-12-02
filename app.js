@@ -24,7 +24,6 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname , "public")));
 app.engine("ejs" , ejsMate);
 
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const MONGO_URL = process.env.ATLASDB_URL;
 console.log(process.env.ATLASDB_URL)
 
@@ -40,7 +39,7 @@ async function main(){
 }
 
 app.use(session({
-    secret : "mysecretcode",
+    secret : process.env.SECRET,
     resave : false,
     saveUninitialized : true,
     cookie : {
@@ -51,7 +50,7 @@ app.use(session({
     store : MongoStore.create({
         mongoUrl : MONGO_URL,
         crypto : {
-            secret : "mysecretcode",
+            secret : process.env.SECRET,
         },
         touchafter : 24 * 3600
     })
