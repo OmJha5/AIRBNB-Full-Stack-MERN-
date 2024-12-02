@@ -35,8 +35,12 @@ module.exports.show = async (req , res) => {
 
 module.exports.newListing = async(req , res , next) => {
     if(req.body.Listing == undefined) next(new ExpressError(400 , "Send Valid Data For Listing")) // Bad Request.
+    let url = req.file.path;
+    let filename = req.file.filename;
+
     const newListing = new Listing(req.body.Listing)
     newListing.owner = req.user._id;
+    newListing.image = {url , filename}
     req.flash("success" , "New Listing Created!");
     await newListing.save()
     res.redirect("/listings");

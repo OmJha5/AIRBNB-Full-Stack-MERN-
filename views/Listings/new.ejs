@@ -2,7 +2,7 @@
 
 <body>
     
-    <form action="/listings" method="POST" class="needs-validation" novalidate>
+    <form action="/listings" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
         <h1>Create New Listing</h1>
 
         <div class="title">
@@ -18,9 +18,9 @@
         </div>
 
         <div class="image">
-            <label for="image" class="form-label">Image</label> <br>
-            <input type="url" name="Listing[image]" placeholder="Enter URL of Image" id="image"  class="form-control">
-            <div class="invalid-feedback">Please Enter Image URL</div>
+            <label for="image" class="form-label">Upload Listing Image</label> <br>
+            <input type="file" name="Listing[image]" placeholder="Enter URL of Image" id="image"  class="form-control">
+            <div class="invalid-feedback">Please Upload Image</div>
         </div>
 
         <div class="priceAndCountry">
