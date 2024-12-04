@@ -14,6 +14,7 @@ router.route("/")
     .post(upload.single('Listing[image]') , isLoggedIn , validateListing,  wrapAsync(listingController.newListing));
 
 router.get("/new" , isLoggedIn , wrapAsync(listingController.newListingForm));
+router.get("/category/:categoryName" , wrapAsync(listingController.categoryPage))
 
 router.route("/:id")
     .get(wrapAsync(listingController.show))

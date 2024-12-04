@@ -8,9 +8,9 @@ module.exports.isLoggedIn = (req , res , next) => {
     req.session.redirectUrl = req.originalUrl;
     if(!req.isAuthenticated()){
         req.flash("error" , "Please login for creating a new listing!")
-        res.redirect("/login");
+        return res.redirect("/login");
     }
-    next();
+    return next();
 }
 
 module.exports.savedRedirectUrl = (req , res , next) => {
@@ -39,7 +39,7 @@ module.exports.validateListing = (req , res , next) => {
     if(result.error){
         throw new ExpressError(404 , "Schema validation failed.")
     }
-    else next();
+    else return next();
 }
 
 module.exports.validateReview = (req , res , next) => {

@@ -37,6 +37,22 @@
             <input name="Listing[location]" type="text" placeholder="Enter Location" id="location" value="<%= listing.location %>" class="form-control" required>
         </div>
 
+        <div class="category mb-3 mt-3">
+            <label for="category" class="mb-2">Category</label>
+            <select id = "category" class="form-control form-select" name="Listing[category]" id="">
+                <option value="trending">Trending</option>
+                <option value="rooms">Rooms</option>
+                <option value="iconiccity">Iconic City</option>
+                <option value="castles">Castles</option>
+                <option value="amazingpools">Amazing Pools</option>
+                <option value="camping">Camping</option>
+                <option value="beech">Beech</option>
+                <option value="arctic">Arctic</option>
+                <option value="beachfront">Beach Front</option>
+                <option value="domes">Domes</option>
+            </select>
+        </div>
+
         <button id="btn">Edit</button>
     </form>
 

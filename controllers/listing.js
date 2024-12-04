@@ -9,7 +9,7 @@ module.exports.index = async (req , res) => {
     res.render("Listings/index.ejs" , { allListings });
 }
 
-module.exports.newListingForm = (req , res) => {
+module.exports.newListingForm = async (req , res) => {
     res.locals.currUser = req.user;
     res.render("Listings/new.ejs" , {page : "new"});
 }
@@ -27,6 +27,7 @@ module.exports.show = async (req , res) => {
         req.flash("error" , "Listing you requested does not exist!")
         res.redirect("/listings")
     }
+    console.log(listing)
     res.locals.success = req.flash("success")
     res.locals.error = req.flash("error")
     res.locals.currUser = req.user;
@@ -44,6 +45,14 @@ module.exports.newListing = async(req , res , next) => {
     req.flash("success" , "New Listing Created!");
     await newListing.save()
     res.redirect("/listings");
+}
+
+module.exports.categoryPage = async(req , res , next) => {
+    let {categoryName} = req.params;
+    let allListings = await Listing.find({category : categoryName})
+    res.locals.currUser = req.user;
+
+    res.render("Listings/category.ejs" , {allListings , categoryName : categoryName})
 }
 
 module.exports.editForm = async (req , res) => {

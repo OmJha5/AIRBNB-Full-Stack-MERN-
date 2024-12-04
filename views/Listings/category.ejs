@@ -1,6 +1,6 @@
 <% layout("/layouts/boilerplate.ejs") %>
-<body>
 
+<body>
     <%- include("../includes/filters.ejs") %>
 
     <div class="cards">
@@ -26,6 +26,14 @@
             <h1>Oops No Listings Found!</h1>
         </div>
     <% } %>
-    
+
     <script src="/js/taxshow.js"></script>
+    <script>
+        let name = "<%= categoryName %>";
+        let filter = document.getElementById(name);
+        filter.style.opacity = "1";
+        filter.style.transform = "scale(1.05)"
+
+    </script>
+
 </body>
